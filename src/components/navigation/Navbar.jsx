@@ -55,7 +55,7 @@ const Navbar = () => {
         <a className="cursor-pointer">
           <img src={profilePhoto} alt="" />
         </a>
-        <a className="btn btn-secondary py-6 px-10 text-lg text-white">Login</a>
+        <a className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white">Login</a>
       </div>
     </div>
   );

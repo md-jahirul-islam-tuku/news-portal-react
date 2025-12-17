@@ -8,11 +8,13 @@ import RightSide from "../pages/home/RightSide";
 
 const MainLayout = () => {
   return (
-    <div className="w-10/12 mx-auto my-10">
-      <Header />
-      <LatestNews />
-      <Navbar />
-      <main className="grid grid-cols-12">
+    <div className="w-10/12 mx-auto">
+      <div className="sticky z-10 top-0 bg-white">
+        <Header />
+        <LatestNews />
+        <Navbar />
+      </div>
+      <main className="grid lg:grid-cols-12">
         <LeftSide />
         <Outlet />
         <RightSide />

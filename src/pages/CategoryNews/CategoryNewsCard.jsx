@@ -43,20 +43,13 @@ const CategoryNewsCard = ({ item }) => {
         />
       </figure>
       <div className="card-body">
-        <p>{details}</p>
+        <p>{details.slice(0,250)}... <span className="text-accent">Read More</span></p>
         <hr className="border-neutral border-2 border-dashed my-2" />
         <div className="flex items-center justify-between">
-          <div className="flex gap-1 items-center">
-            <FaStar className="text-amber-500" />
-            <FaStar className="text-amber-500" />
-            <FaStar className="text-amber-500" />
-            <FaStar className="text-amber-500" />
-            <FaStar className="text-amber-500" />
-            <h4 className="text-lg">{rating.number}</h4>
-          </div>
+          <div className="flex items-center gap-1"><h1>{"⭐".repeat(rating.number)}</h1> <h1 className="mt-0.5 text-lg font-semibold text-primary">{rating.number}</h1></div>
           <div className="flex items-center gap-2">
             <FaEye className="text-2xl" />
-            <h3>{total_view}</h3>
+            <h3 className="">{total_view}</h3>
           </div>
         </div>
       </div>

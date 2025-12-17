@@ -18,4 +18,5 @@
 
 a.active{
   background-color: #F3F3F3;
+  border-right: 8px solid #c5c5c5;
 }
