@@ -16,6 +16,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* a.active{
-  background-color: gray;
-} */
+a.active{
+  background-color: #F3F3F3;
+}
