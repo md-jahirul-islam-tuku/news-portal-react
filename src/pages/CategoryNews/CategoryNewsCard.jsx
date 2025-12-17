@@ -54,8 +54,8 @@ const CategoryNewsCard = ({ item }) => {
             <FaStar className="text-amber-500" />
             <h4 className="text-lg">{rating.number}</h4>
           </div>
-          <div className="flex items-center gap-2 text-xl">
-            <FaEye />
+          <div className="flex items-center gap-2">
+            <FaEye className="text-2xl" />
             <h3>{total_view}</h3>
           </div>
         </div>
