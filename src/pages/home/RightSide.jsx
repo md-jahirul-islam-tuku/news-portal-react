@@ -9,7 +9,7 @@ import bg from "../../assets/bg.png";
 
 const RightSide = () => {
   return (
-    <div className="col-span-3 px-4">
+    <div className="col-span-3 px-4 sticky top-2 h-fit mb-5">
       <h1 className="text-2xl text-secondary font-semibold mb-5">Login With</h1>
       <div>
         <button className="btn bg-white text-black border-info w-full mb-2">

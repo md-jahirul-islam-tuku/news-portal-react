@@ -9,8 +9,8 @@ const LeftSide = () => {
   const health = use(healthPromise);
   const healthData = health.filter((item) => item.category_id === 4);
   return (
-    <div className="col-span-3 mr-5 text-center">
-      <h1 className="text-2xl text-secondary font-semibold mb-5">
+    <div className="col-span-3 mr-5 sticky h-fit top-2">
+      <h1 className="text-2xl text-secondary font-semibold mb-3">
         All Category
       </h1>
       <div className="space-y-2">
@@ -24,7 +24,7 @@ const LeftSide = () => {
           </NavLink>
         ))}
       </div>
-      <div className="my-10 hidden lg:flex lg:flex-col">
+      <div className="mt-10 hidden lg:flex lg:flex-col">
         {healthData.map((item) => (
           <div key={item.id} className="bg-neutral mb-5 rounded-b-md">
             <img
