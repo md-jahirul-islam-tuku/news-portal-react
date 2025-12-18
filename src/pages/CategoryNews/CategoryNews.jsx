@@ -24,7 +24,11 @@ const CategoryNews = () => {
   const data = useLoaderData();
   const categoriesTitle = categories.find((item) => item.id === Number(id));
   const news =
-    id === "0" ? data : data.filter((news) => news.category_id === Number(id));
+    id === "0"
+      ? data
+      : id === "1"
+      ? data.filter((news) => news.others.is_today_pick === true)
+      : data.filter((news) => news.category_id === Number(id));
   return (
     <div className="col-span-6">
       <h1 className="text-2xl text-secondary font-semibold mb-5">

@@ -60,49 +60,45 @@ const RightSide = () => {
       </div>
       <div className="hidden lg:flex lg:flex-col">
         <h1 className="text-2xl font-bold text-secondary my-5">Find Us On</h1>
-      <table className="w-full border border-gray-300 rounded-xl overflow-hidden border-separate border-spacing-0">
-        <table className="w-full border border-gray-300 rounded-xl overflow-hidden border-collapse">
-          <tbody>
-            <tr>
-              <a href="https://www.facebook.com/" target="_blank">
-                <td className="border-b border-gray-300 p-4 flex items-center gap-4">
-                  <img
-                    src={fb}
-                    className="w-9 px-3 py-2 bg-neutral rounded-full"
-                  />
-                  <p className="text-xl font-bold text-primary">Facebook</p>
-                </td>
-              </a>
-            </tr>
-            <tr>
-              <a href="https://x.com/" target="_blank">
-                <td className="border-b border-gray-300 p-4 flex items-center gap-4">
-                  <img
-                    src={twt}
-                    className="w-9 px-2 py-2.5 bg-neutral rounded-full"
-                  />
-                  <p className="text-xl font-bold text-primary">Twitter</p>
-                </td>
-              </a>
-            </tr>
-            <tr>
-              <a href="https://www.instagram.com/" target="_blank">
-                <td className="p-4 flex items-center gap-4">
-                  <img src={inst} className="w-9 p-2 bg-neutral rounded-full" />
-                  <p className="text-xl font-bold text-primary">Instagram</p>
-                </td>
-              </a>
-            </tr>
-          </tbody>
-        </table>
-      </table>
-      <div className="py-4 px-2 bg-neutral mt-3">
-        <h1 className="text-2xl font-bold text-primary">Q-Zone</h1>
-        <img className="w-full py-2" src={swim} alt="" />
-        <img className="w-full py-2" src={cls} alt="" />
-        <img className="w-full py-2" src={play} alt="" />
-      </div>
-      <img className="mt-4 w-full" src={bg} alt="" />
+        <ul className="border border-gray-300 rounded-xl">
+          <li>
+            <a
+              className="flex items-center gap-4 border-b border-gray-300 p-4"
+              href="https://www.facebook.com/"
+              target="_blank"
+            >
+              <img src={fb} className="w-10 px-3.5 py-2 bg-neutral rounded-full" />
+              <p className="text-xl font-bold text-primary">Facebook</p>
+            </a>
+          </li>
+          <li>
+            <a
+              className="flex items-center gap-4 border-b border-gray-300 p-4"
+              href="https://www.x.com/"
+              target="_blank"
+            >
+              <img src={twt} className="w-10 px-1.5 py-2 bg-neutral rounded-full" />
+              <p className="text-xl font-bold text-primary">Twitter</p>
+            </a>
+          </li>
+          <li>
+            <a
+              className="flex items-center gap-4 p-4"
+              href="https://www.instagram.com/"
+              target="_blank"
+            >
+              <img src={inst} className="w-10 px-3 py-3 bg-neutral rounded-full" />
+              <p className="text-xl font-bold text-primary">Instagram</p>
+            </a>
+          </li>
+        </ul>
+        <div className="py-4 px-2 bg-neutral mt-3">
+          <h1 className="text-2xl font-bold text-primary">Q-Zone</h1>
+          <img className="w-full py-2" src={swim} alt="" />
+          <img className="w-full py-2" src={cls} alt="" />
+          <img className="w-full py-2" src={play} alt="" />
+        </div>
+        <img className="mt-4 w-full" src={bg} alt="" />
       </div>
     </div>
   );

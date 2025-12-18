@@ -26,7 +26,7 @@ const LeftSide = () => {
       </div>
       <div className="my-10 hidden lg:flex lg:flex-col">
         {healthData.map((item) => (
-          <div className="bg-neutral mb-5 rounded-b-md">
+          <div key={item.id} className="bg-neutral mb-5 rounded-b-md">
             <img
               className="rounded-t-md w-full"
               src={item.image_url}
