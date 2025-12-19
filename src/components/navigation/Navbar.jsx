@@ -1,8 +1,18 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { use } from "react";
+import { Link, NavLink } from "react-router";
 import profilePhoto from "../../assets/user.png";
+import { AuthContext } from "../../pages/Authentication/AuthContext";
 
 const Navbar = () => {
+  const { user, signOutUser } = use(AuthContext);
+  console.log(user?.photoURL);
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const link = (
     <>
       <li>
@@ -55,7 +65,21 @@ const Navbar = () => {
         <a className="cursor-pointer">
           <img src={profilePhoto} alt="" />
         </a>
-        <a className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white">Login</a>
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white"
+          >
+            Log out
+          </button>
+        ) : (
+          <Link
+            to={"/auth/login"}
+            className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white"
+          >
+            Log in
+          </Link>
+        )}
       </div>
     </div>
   );

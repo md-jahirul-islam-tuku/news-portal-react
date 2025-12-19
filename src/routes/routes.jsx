@@ -7,6 +7,9 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CategoryNews from "../pages/CategoryNews/CategoryNews";
 import NewsDetails from "../pages/CategoryNews/NewsDetails";
 import OthersLayout from "../layouts/OthersLayout";
+import AuthLayout from "../layouts/AuthLayout";
+import Login from "../pages/Authentication/Login";
+import Signup from "../pages/Authentication/Signup";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +54,20 @@ const router = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: "auth",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "signUp",
+        Component: Signup,
+      },
+    ],
+  },
   {
     path: "/*",
     Component: ErrorPage,
