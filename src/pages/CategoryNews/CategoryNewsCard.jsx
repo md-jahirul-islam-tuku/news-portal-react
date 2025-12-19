@@ -3,6 +3,7 @@ import { CiBookmark, CiShare2 } from "react-icons/ci";
 import { FaEye, FaStar } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
 import { IoMdShare } from "react-icons/io";
+import { Link } from "react-router";
 
 const CategoryNewsCard = ({ item }) => {
   const {
@@ -43,10 +44,23 @@ const CategoryNewsCard = ({ item }) => {
         />
       </figure>
       <div className="card-body">
-        <p>{details.slice(0,250)}... <span className="text-accent">Read More</span></p>
+        <p>
+          {details.slice(0, 250)}...{" "}
+          <Link
+            to={`/others/${id}`}
+            className="text-accent underline"
+          >
+            Read More
+          </Link>
+        </p>
         <hr className="border-neutral border-2 border-dashed my-2" />
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1"><h1>{"⭐".repeat(rating.number)}</h1> <h1 className="mt-0.5 text-lg font-semibold text-primary">{rating.number}</h1></div>
+          <div className="flex items-center gap-1">
+            <h1>{"⭐".repeat(rating.number)}</h1>{" "}
+            <h1 className="mt-0.5 text-lg font-semibold text-primary">
+              {rating.number}
+            </h1>
+          </div>
           <div className="flex items-center gap-2">
             <FaEye className="text-2xl" />
             <h3 className="">{total_view}</h3>

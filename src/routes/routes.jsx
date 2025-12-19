@@ -5,6 +5,8 @@ import About from "../pages/public/About";
 import Career from "../pages/public/Career";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CategoryNews from "../pages/CategoryNews/CategoryNews";
+import NewsDetails from "../pages/CategoryNews/NewsDetails";
+import OthersLayout from "../layouts/OthersLayout";
 
 const router = createBrowserRouter([
   {
@@ -27,13 +29,29 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "about",
-    Component: About,
+    path: "others",
+    Component: OthersLayout,
+    children: [
+      {
+        path: "about",
+        Component: About,
+      },
+      {
+        path: "career",
+        Component: Career,
+      },
+      {
+        path: ":id",
+        loader: async () => {
+          const res = await fetch("/news.json");
+          return res.json();
+        },
+        hydrateFallbackElement: <h1>Loading ...</h1>,
+        Component: NewsDetails,
+      },
+    ],
   },
-  {
-    path: "career",
-    Component: Career,
-  },
+
   {
     path: "/*",
     Component: ErrorPage,
