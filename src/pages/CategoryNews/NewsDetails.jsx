@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLoaderData, useParams } from "react-router";
 import Navbar from "../../components/navigation/Navbar";
 import Header from "../../components/header/Header";
@@ -10,6 +10,9 @@ const NewsDetails = () => {
   const newsData = useLoaderData();
   const news = newsData.find((news) => news.id === id);
   const { title, details, image_url, category_id } = news;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="border border-primary-content rounded-lg bg-white overflow-hidden">
       {/* Image */}

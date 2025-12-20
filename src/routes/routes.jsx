@@ -5,11 +5,13 @@ import About from "../pages/public/About";
 import Career from "../pages/public/Career";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CategoryNews from "../pages/CategoryNews/CategoryNews";
-import NewsDetails from "../pages/CategoryNews/NewsDetails";
+
 import OthersLayout from "../layouts/OthersLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/Authentication/Login";
 import Signup from "../pages/Authentication/Signup";
+import PrivateRoutes from "./PrivateRoutes";
+import NewsDetails from "../pages/CategoryNews/NewsDetails";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +52,11 @@ const router = createBrowserRouter([
           return res.json();
         },
         hydrateFallbackElement: <h1>Loading ...</h1>,
-        Component: NewsDetails,
+        element: (
+          <PrivateRoutes>
+            <NewsDetails></NewsDetails>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

@@ -5,7 +5,6 @@ import { AuthContext } from "../../pages/Authentication/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  console.log(user?.photoURL);
   const handleSignOut = () => {
     signOutUser()
       .then(() => {})
@@ -63,7 +62,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-2 items-center">
         <a className="cursor-pointer">
-          <img src={profilePhoto} alt="" />
+          <img className="w-14" src={!user ? profilePhoto : user?.photoURL} alt="" />
         </a>
         {user ? (
           <button

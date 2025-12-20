@@ -1,7 +1,7 @@
 import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "./AuthContext";
-import { updateProfile } from "firebase/auth";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 
 const Signup = () => {
@@ -14,6 +14,27 @@ const Signup = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+    const terms = form.terms.checked;
+    if (terms === false) {
+      setMessage("Please accept the terms and conditions");
+      return;
+    }
+    if (!/.{6,}/.test(password)) {
+      setMessage("Password must be at least 6 characters long.");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setMessage("Password must contain at least one uppercase letter.");
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setMessage("Password must contain at least one lowercase letter.");
+      return;
+    } else if (!/[0-9]/.test(password)) {
+      setMessage("Password must contain at least one number.");
+      return;
+    } else if (!/[^A-Za-z0-9]/.test(password)) {
+      setMessage("Password must contain at least one special character.");
+      return;
+    }
     createUser(email, password)
       .then((result) => {
         alert("Signup successful!");
@@ -21,7 +42,12 @@ const Signup = () => {
           displayName: name,
           photoURL: photo,
         })
-          .then(() => {})
+          .then(() => {
+            sendEmailVerification(auth.currentUser).then(() => {
+              setMessage("Successful! Check your inbox and verify");
+            });
+            e.target.reset();
+          })
           .catch((error) => {
             const errorMessage = error.code || error.message;
             setMessage(errorMessage);
@@ -38,7 +64,8 @@ const Signup = () => {
       onSubmit={handleSignup}
       className="fieldset bg-base-200 border-base-300 rounded-box w-sm border p-4"
     >
-      <h1 className="text-center text-xl font-bold">Please Sign up</h1>
+      <h1 className="text-center text-xl font-bold">Register your account</h1>
+      <hr className="my-5 border-primary-content border-dashed border" />
       <fieldset className="fieldset">
         <label className="font-semibold">Your name</label>
         <input
@@ -78,18 +105,29 @@ const Signup = () => {
           placeholder="Password"
           required
         />
+        <label className="label mt-2 font-semibold text-primary">
+          <input
+            type="checkbox"
+            name="terms"
+            className="checkbox checkbox-xs checkbox-primary"
+          />
+          Accept Terms and Conditions
+        </label>
         <span className="validator-hint hidden">Required</span>
         <span className="text-red-500">{message}</span>
       </label>
-      <button className="btn mt-4" type="submit">
-        Sign up
+      <button className="btn btn-secondary shadow-none mt-4" type="submit">
+        Register
       </button>
       <button className="btn btn-ghost mt-1" type="reset">
         Reset
       </button>
-      <p className="text-center mt-1">
+      <p className="text-center mb-5 text-lg">
         Already have an account?{" "}
-        <Link to={"/auth/login"} className="text-blue-700 hover:underline">
+        <Link
+          to={"/auth/login"}
+          className="text-blue-700 hover:underline font-semibold"
+        >
           Log in
         </Link>
       </p>
