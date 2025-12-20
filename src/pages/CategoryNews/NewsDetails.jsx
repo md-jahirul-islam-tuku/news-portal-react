@@ -21,7 +21,6 @@ const NewsDetails = () => {
         setCategoryName(filteredCategoryName);
       });
   },[category_id]);
-  console.log(categoryName.name)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -44,7 +43,7 @@ const NewsDetails = () => {
 
           {/* Button */}
           <Link
-            to={`/category/${category_id}`}
+            to={`/${category_id}`}
             className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded"
           >
             <FaArrowLeft /> All news in this category

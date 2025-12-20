@@ -14,6 +14,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 import PrivateRoutes from "./PrivateRoutes";
 import AuthRoutes from "./AuthRoutes";
+import Loading from "../pages/Loading/Loading";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
           const res = await fetch("/news.json");
           return res.json();
         },
-        hydrateFallbackElement: <h1>Loading....</h1>,
+        hydrateFallbackElement: <Loading></Loading>,
         element: <CategoryNews />,
       },
     ],
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
           const res = await fetch("/news.json");
           return res.json();
         },
-        hydrateFallbackElement: <h1>Loading....</h1>,
+        hydrateFallbackElement: <Loading></Loading>,
         element: (
           <PrivateRoutes>
             <NewsDetails />
