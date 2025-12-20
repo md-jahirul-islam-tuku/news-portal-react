@@ -1,21 +1,24 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "./AuthContext";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/firebase.init";
 
 const Signup = () => {
   const [message, setMessage] = useState("");
-  const { createUser } = use(AuthContext);
+  const { createUser } = useContext(AuthContext);
+
   const handleSignup = (e) => {
     e.preventDefault();
     const form = e.target;
+
     const name = form.userName.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
     const terms = form.terms.checked;
-    if (terms === false) {
+
+    // validations
+    if (!terms) {
       setMessage("Please accept the terms and conditions");
       return;
     }
@@ -35,65 +38,64 @@ const Signup = () => {
       setMessage("Password must contain at least one special character.");
       return;
     }
+
     createUser(email, password)
-      .then((result) => {
-        alert("Signup successful!");
-        updateProfile(auth.currentUser, {
+      .then(async (result) => {
+        const user = result.user; // ✅ SAFE USER
+
+        // update profile
+        await updateProfile(user, {
           displayName: name,
           photoURL: photo,
-        })
-          .then(() => {
-            sendEmailVerification(auth.currentUser).then(() => {
-              setMessage("Successful! Check your inbox and verify");
-            });
-            e.target.reset();
-          })
-          .catch((error) => {
-            const errorMessage = error.code || error.message;
-            setMessage(errorMessage);
-          });
-        console.log(result.user);
+        });
+
+        // send verification email
+        await sendEmailVerification(user);
+
+        setMessage("Signup successful! Please verify your email.");
+        form.reset();
       })
       .catch((error) => {
-        const errorMessage = error.code || error.message;
-        setMessage(errorMessage);
+        setMessage(error.code || error.message);
       });
   };
+
   return (
     <form
       onSubmit={handleSignup}
       className="fieldset bg-base-200 border-base-300 rounded-box w-sm border p-4"
     >
-      <h1 className="text-center text-xl font-bold">Register your account</h1>
+      <h1 className="text-center text-xl font-bold">
+        Register your account
+      </h1>
+
       <hr className="my-5 border-primary-content border-dashed border" />
+
       <fieldset className="fieldset">
         <label className="font-semibold">Your name</label>
         <input
           name="userName"
           type="text"
-          className="input w-full validator"
+          className="input w-full"
           placeholder="Name"
-          // required
         />
-        <p className="validator-hint hidden">Required</p>
+
         <label className="font-semibold">Your photo</label>
         <input
           name="photo"
           type="text"
-          className="input w-full validator"
+          className="input w-full"
           placeholder="Photo URL"
-          // required
         />
-        <p className="validator-hint hidden">Required</p>
+
         <label className="font-semibold">Email address</label>
         <input
           name="email"
           type="email"
-          className="input w-full validator"
+          className="input w-full"
           placeholder="Email"
           required
         />
-        <p className="validator-hint hidden">Required</p>
       </fieldset>
 
       <label className="fieldset">
@@ -101,10 +103,11 @@ const Signup = () => {
         <input
           name="password"
           type="password"
-          className="input w-full validator"
+          className="input w-full"
           placeholder="Password"
           required
         />
+
         <label className="label mt-2 font-semibold text-primary">
           <input
             type="checkbox"
@@ -113,19 +116,18 @@ const Signup = () => {
           />
           Accept Terms and Conditions
         </label>
-        <span className="validator-hint hidden">Required</span>
+
         <span className="text-red-500">{message}</span>
       </label>
-      <button className="btn btn-secondary shadow-none mt-4" type="submit">
+
+      <button className="btn btn-secondary mt-4" type="submit">
         Register
       </button>
-      <button className="btn btn-ghost mt-1" type="reset">
-        Reset
-      </button>
-      <p className="text-center mb-5 text-lg">
+
+      <p className="text-center mt-4">
         Already have an account?{" "}
         <Link
-          to={"/auth/login"}
+          to="/auth/login"
           className="text-blue-700 hover:underline font-semibold"
         >
           Log in

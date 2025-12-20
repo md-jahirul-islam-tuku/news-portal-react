@@ -1,26 +1,29 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout";
+import OthersLayout from "../layouts/OthersLayout";
+import AuthLayout from "../layouts/AuthLayout";
+
 import Home from "../pages/public/Home";
 import About from "../pages/public/About";
 import Career from "../pages/public/Career";
-import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CategoryNews from "../pages/CategoryNews/CategoryNews";
-
-import OthersLayout from "../layouts/OthersLayout";
-import AuthLayout from "../layouts/AuthLayout";
+import NewsDetails from "../pages/CategoryNews/NewsDetails";
 import Login from "../pages/Authentication/Login";
 import Signup from "../pages/Authentication/Signup";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+
 import PrivateRoutes from "./PrivateRoutes";
-import NewsDetails from "../pages/CategoryNews/NewsDetails";
+import AuthRoutes from "./AuthRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: "",
-        Component: Home,
+        index: true, // ✅ Home route
+        element: <Home />,
       },
       {
         path: "category/:id",
@@ -28,22 +31,27 @@ const router = createBrowserRouter([
           const res = await fetch("/news.json");
           return res.json();
         },
-        hydrateFallbackElement: <h1>Loading ...</h1>,
-        Component: CategoryNews,
+        hydrateFallbackElement: <h1>Loading....</h1>,
+        element: <CategoryNews />,
       },
     ],
   },
+
   {
     path: "others",
-    Component: OthersLayout,
+    element: (
+      <PrivateRoutes>
+        <OthersLayout />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "about",
-        Component: About,
+        element: <About />,
       },
       {
         path: "career",
-        Component: Career,
+        element: <Career />,
       },
       {
         path: ":id",
@@ -51,32 +59,29 @@ const router = createBrowserRouter([
           const res = await fetch("/news.json");
           return res.json();
         },
-        hydrateFallbackElement: <h1>Loading ...</h1>,
-        element: (
-          <PrivateRoutes>
-            <NewsDetails></NewsDetails>
-          </PrivateRoutes>
-        ),
+        hydrateFallbackElement: <h1>Loading....</h1>,
+        element: <NewsDetails />,
       },
     ],
   },
+
   {
     path: "auth",
-    Component: AuthLayout,
+    element: (
+      <AuthRoutes>
+        <AuthLayout />
+      </AuthRoutes>
+    ),
     children: [
       {
         path: "login",
-        Component: Login,
+        element: <Login />,
       },
       {
-        path: "signUp",
-        Component: Signup,
+        path: "signup",
+        element: <Signup />,
       },
     ],
-  },
-  {
-    path: "/*",
-    Component: ErrorPage,
   },
 ]);
 

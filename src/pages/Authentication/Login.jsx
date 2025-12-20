@@ -41,11 +41,14 @@ const Login = () => {
         setMessage("Please verify your email. Check Inbox.");
         return;
       }
+      navigate(from, { replace: true });
     } catch (error) {
-      const errorMessage = error.code || error.message;
-      setMessage(errorMessage);
+      if (error.code === "auth/invalid-credential") {
+        setMessage("Invalid email or password.");
+      } else {
+        setMessage(error.message);
+      }
     }
-    navigate(from, { replace: true });
   };
   return (
     <form
