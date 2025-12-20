@@ -17,7 +17,7 @@ const AuthRoutes = ({ children }) => {
   if (user) {
     return (
       <Navigate
-        to={location.state?.from?.pathname || "/category/0"}
+        to={location.state?.from?.pathname || "/0"}
         state={{ from: location }}
         replace
       />

@@ -87,7 +87,11 @@ const Login = () => {
       <button className="btn btn-secondary shadow-none mt-1" type="submit">
         Login
       </button>
-      <button className="btn btn-ghost mt-1" type="reset">
+      <button
+        onClick={setMessage}
+        className="btn btn-ghost mt-1"
+        type="reset"
+      >
         Reset
       </button>
       <p className="text-center mb-5 text-lg">

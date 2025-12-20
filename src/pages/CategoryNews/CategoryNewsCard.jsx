@@ -24,7 +24,7 @@ const CategoryNewsCard = ({ item }) => {
     <div className="card bg-base-100 shadow-sm mb-5">
       <div className="bg-neutral flex justify-between items-center px-5 py-3 rounded-t-lg">
         <div className="flex items-center gap-3">
-          <img className="rounded-full w-14" src={author.img} alt="" />
+          <img className="rounded-full w-14" src={author?.img} alt="" />
           <div>
             <h4 className="text-xl font-bold text-secondary">{author.name}</h4>
             <p className="text-primary">{author.published_date}</p>

@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "category/:id",
+        path: ":id",
         loader: async () => {
           const res = await fetch("/news.json");
           return res.json();
@@ -39,11 +39,7 @@ const router = createBrowserRouter([
 
   {
     path: "others",
-    element: (
-      <PrivateRoutes>
-        <OthersLayout />
-      </PrivateRoutes>
-    ),
+    element: <OthersLayout />,
     children: [
       {
         path: "about",
@@ -60,7 +56,11 @@ const router = createBrowserRouter([
           return res.json();
         },
         hydrateFallbackElement: <h1>Loading....</h1>,
-        element: <NewsDetails />,
+        element: (
+          <PrivateRoutes>
+            <NewsDetails />
+          </PrivateRoutes>
+        ),
       },
     ],
   },

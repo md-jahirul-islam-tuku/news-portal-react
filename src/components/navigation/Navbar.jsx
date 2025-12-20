@@ -16,7 +16,7 @@ const Navbar = () => {
   const link = (
     <>
       <li>
-        <NavLink to={"/category/0"}>Home</NavLink>
+        <NavLink to={"/0"}>Home</NavLink>
       </li>
       <li>
         <NavLink to={"/others/about"}>About</NavLink>
@@ -62,12 +62,11 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end gap-2 items-center">
-        <a className="cursor-pointer">
-          <img className="w-14" src={!user ? profilePhoto : ""} alt="" />
-        </a>
         {user ? (
           <>
-            <h1 className="text-lg font-bold text-accent">{user?.displayName}</h1>
+            <h1 className="text-lg font-bold text-accent">
+              {user?.displayName}
+            </h1>
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -95,20 +94,27 @@ const Navbar = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <button onClick={handleSignOut} className="text-accent font-bold">
-                  <MdLogout />Log out
+                  <button
+                    onClick={handleSignOut}
+                    className="text-accent font-bold"
+                  >
+                    <MdLogout />
+                    Log out
                   </button>
                 </li>
               </ul>
             </div>
           </>
         ) : (
-          <Link
-            to={"/auth/login"}
-            className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white"
-          >
-            Log in
-          </Link>
+          <>
+            <img className="w-14" src={profilePhoto} alt="fake_profile" />
+            <Link
+              to={"/auth/login"}
+              className="btn btn-secondary shadow-none py-6 px-10 text-lg text-white"
+            >
+              Log in
+            </Link>
+          </>
         )}
       </div>
     </div>

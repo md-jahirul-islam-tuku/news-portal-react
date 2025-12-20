@@ -17,7 +17,7 @@ const LeftSide = () => {
         {categories.map((category) => (
           <NavLink
             key={category.id}
-            to={`/category/${category.id}`}
+            to={`/${category.id}`}
             className="btn btn-ghost w-full justify-start text-left text-2xl font-normal"
           >
             {category.name}
