@@ -15,7 +15,6 @@ const CategoryNews = () => {
         setCategories(categoriesData);
       } catch {
         setError("Something went wrong");
-        console.log(error);
       }
     })();
   }, [error]);

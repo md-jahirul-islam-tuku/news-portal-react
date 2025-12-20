@@ -12,7 +12,6 @@ const LatestNews = () => {
         setLatestNews(categoriesData);
       } catch {
         setError("Something went wrong");
-        console.log(error);
       }
     })();
   }, [error]);
