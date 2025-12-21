@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import fb from "../../assets/fb.png";
 import twt from "../../assets/twitter.png";
 import inst from "../../assets/instagram.png";
@@ -6,13 +6,32 @@ import swim from "../../assets/swimming.png";
 import cls from "../../assets/class.png";
 import play from "../../assets/playground.png";
 import bg from "../../assets/bg.png";
+import { AuthContext } from "../Authentication/AuthContext";
 
 const RightSide = () => {
+  const { loginGoogle, loginGithub } = use(AuthContext);
+  const handleLoginGoogle = () => {
+    loginGoogle()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+  const handleLoginGithub = () => {
+    loginGithub()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   return (
     <div className="col-span-3 px-4 sticky top-2 h-fit mb-5">
       <h1 className="text-2xl text-secondary font-semibold mb-5">Login With</h1>
       <div>
-        <button className="btn bg-white text-black border-info w-full mb-2">
+        <button
+          onClick={handleLoginGoogle}
+          className="btn btn-ghost text-black border-info w-full mb-5"
+        >
           <svg
             aria-label="Google logo"
             width="16"
@@ -42,7 +61,7 @@ const RightSide = () => {
           </svg>
           Login with Google
         </button>
-        <button className="btn border-black w-full">
+        <button onClick={handleLoginGithub} className="btn border-black w-full">
           <svg
             aria-label="GitHub logo"
             width="16"
@@ -67,7 +86,10 @@ const RightSide = () => {
               href="https://www.facebook.com/"
               target="_blank"
             >
-              <img src={fb} className="w-10 px-3.5 py-2 bg-neutral rounded-full" />
+              <img
+                src={fb}
+                className="w-10 px-3.5 py-2 bg-neutral rounded-full"
+              />
               <p className="text-xl font-bold text-primary">Facebook</p>
             </a>
           </li>
@@ -77,7 +99,10 @@ const RightSide = () => {
               href="https://www.x.com/"
               target="_blank"
             >
-              <img src={twt} className="w-10 px-1.5 py-2 bg-neutral rounded-full" />
+              <img
+                src={twt}
+                className="w-10 px-1.5 py-2 bg-neutral rounded-full"
+              />
               <p className="text-xl font-bold text-primary">Twitter</p>
             </a>
           </li>
@@ -87,7 +112,10 @@ const RightSide = () => {
               href="https://www.instagram.com/"
               target="_blank"
             >
-              <img src={inst} className="w-10 px-3 py-3 bg-neutral rounded-full" />
+              <img
+                src={inst}
+                className="w-10 px-3 py-3 bg-neutral rounded-full"
+              />
               <p className="text-xl font-bold text-primary">Instagram</p>
             </a>
           </li>

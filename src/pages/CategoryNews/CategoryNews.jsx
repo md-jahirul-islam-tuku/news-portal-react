@@ -10,14 +10,14 @@ const CategoryNews = () => {
   useEffect(() => {
     (async () => {
       try {
-        const categoriesRes = await fetch("../../../public/categories.json");
+        const categoriesRes = await fetch("/categories.json");
         const categoriesData = await categoriesRes.json();
         setCategories(categoriesData);
       } catch {
         setError("Something went wrong");
       }
     })();
-  }, [error]);
+  }, []);
 
   const { id } = useParams();
   const data = useLoaderData();

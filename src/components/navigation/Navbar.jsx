@@ -6,6 +6,7 @@ import { MdLogout } from "react-icons/md";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  console.log(user)
   const handleSignOut = () => {
     signOutUser()
       .then(() => {})
@@ -74,7 +75,7 @@ const Navbar = () => {
               >
                 <div className="w-10 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
+                    alt="profile"
                     src={user?.photoURL}
                   />
                 </div>
